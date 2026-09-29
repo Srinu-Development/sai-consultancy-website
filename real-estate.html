@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="te">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Real Estate | Sai Consultancy</title>
+
+    <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <img src="images/logo.png"
+             alt="Sai Consultancy Logo">
+
+        <div>
+
+            <h1>Sai Consultancy</h1>
+
+            <p>Real Estate & Financial Services</p>
+
+        </div>
+
+    </div>
+
+
+    <div class="top-contact">
+
+        <a href="tel:+919866779493">
+            📞 +91 98667 79493
+        </a>
+
+        <a href="https://wa.me/919866779493"
+           target="_blank">
+
+            💬 WhatsApp
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <a href="index.html">
+        Home
+    </a>
+
+    <a href="real-estate.html"
+       class="active">
+
+        Real Estate
+
+    </a>
+
+    <a href="home-loans.html">
+
+        Home Loans
+
+    </a>
+
+    <a href="contact.html">
+
+        Contact
+
+    </a>
+
+</nav>
+
+
+
+<!-- ================= PAGE BANNER ================= -->
+
+<section class="page-banner">
+
+    <div>
+
+        <h2>
+            Real Estate Properties
+        </h2>
+
+        <p>
+            మీకు నచ్చిన ప్రాపర్టీని ఎంచుకోండి
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= LOCATION FILTER ================= -->
+
+<section class="property-search">
+
+    <h2>
+        Find Properties
+    </h2>
+
+    <p>
+        మీకు కావాల్సిన ప్రాంతాన్ని ఎంచుకోండి
+    </p>
+
+
+    <div class="search-box">
+
+        <select id="locationFilter">
+
+            <option value="all">
+                All Locations
+            </option>
+
+            <option value="narsipatnam">
+                Narsipatnam
+            </option>
+
+            <option value="visakhapatnam">
+                Visakhapatnam
+            </option>
+
+            <option value="anakapalle">
+                Anakapalle
+            </option>
+
+            <option value="other">
+                Other Locations
+            </option>
+
+        </select>
+
+
+        <select id="propertyType">
+
+            <option value="all">
+                All Property Types
+            </option>
+
+            <option value="plot">
+                Open Plot
+            </option>
+
+            <option value="flat">
+                Flat
+            </option>
+
+            <option value="villa">
+                Villa
+            </option>
+
+            <option value="commercial">
+                Commercial
+            </option>
+
+            <option value="land">
+                Agricultural Land
+            </option>
+
+        </select>
+
+
+        <button onclick="filterProperties()">
+
+            Search Properties
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= PROPERTY LIST ================= -->
+
+<section class="properties">
+
+    <div class="section-title">
+
+        <h2>Available Properties</h2>
+
+        <p>
+            మీకు నచ్చిన ప్రాపర్టీని ఎంచుకోండి
+        </p>
+
+    </div>
+
+    <!-- Dynamic Properties -->
+    <div class="property-grid" id="propertyGrid">
+
+        <!-- Properties are automatically loaded from properties.js -->
+
+    </div>
+
+    <div id="property-message" class="property-message"></div>
+
+</section>
+
+
+
+<!-- ================= WHY US ================= -->
+
+<section class="why-us">
+
+    <h2>
+        Why Choose Sai Consultancy?
+    </h2>
+
+
+    <div class="why-grid">
+
+        <div>
+
+            <span>📍</span>
+
+            <h3>
+                Multiple Locations
+            </h3>
+
+            <p>
+                Different areasలో available
+                properties.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <span>📸</span>
+
+            <h3>
+                Real Property Images
+            </h3>
+
+            <p>
+                Actual property images
+                upload చేయవచ్చు.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <span>🤝</span>
+
+            <h3>
+                Personal Assistance
+            </h3>
+
+            <p>
+                Property enquiry కోసం
+                direct contact.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <span>💬</span>
+
+            <h3>
+                WhatsApp Support
+            </h3>
+
+            <p>
+                Direct WhatsApp enquiry.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT CTA ================= -->
+
+<section class="contact-cta">
+
+    <h2>
+        Looking for a Property?
+    </h2>
+
+    <p>
+        మీకు కావాల్సిన property గురించి
+        తెలుసుకోవడానికి మమ్మల్ని సంప్రదించండి.
+    </p>
+
+
+    <div class="contact-buttons">
+
+        <a href="tel:+919866779493">
+
+            📞 Call Now
+
+        </a>
+
+
+        <a href="https://wa.me/919866779493"
+           target="_blank">
+
+            💬 WhatsApp
+
+        </a>
+
+
+        <a href="mailto:saiconsultancys1@gmail.com">
+
+            📧 Email
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>
+        Sai Consultancy
+    </h3>
+
+    <p>
+        📞 +91 98667 79493
+    </p>
+
+    <p>
+        📧 saiconsultancys1@gmail.com
+    </p>
+
+    <p>
+        📍 నర్సీపట్నం, ఆంధ్ర ప్రదేశ్ - 531116
+    </p>
+
+    <p>
+        © 2026 Sai Consultancy.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+<!-- ================= IMAGE LIGHTBOX ================= -->
+
+<div id="imageLightbox" class="lightbox">
+
+    <button class="lightbox-close"
+            onclick="closeLightbox()">
+        ✕
+    </button>
+
+
+    <button class="lightbox-prev"
+            onclick="changeLightboxImage(-1)">
+        ❮
+    </button>
+
+
+    <div class="lightbox-content">
+
+        <img id="lightboxImage"
+             src=""
+             alt="Property Image">
+
+        <p id="lightboxCounter">
+            1 / 1
+        </p>
+
+    </div>
+
+
+    <button class="lightbox-next"
+            onclick="changeLightboxImage(1)">
+        ❯
+    </button>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="script.js"></script>
+<!-- ================= FLOATING CONTACT BUTTONS ================= -->
+
+<div class="floating-contact">
+
+    <!-- WhatsApp -->
+
+    <a href="https://wa.me/919866779493"
+       target="_blank"
+       class="floating-whatsapp"
+       aria-label="Chat on WhatsApp">
+
+        💬
+
+    </a>
+
+
+    <!-- Call -->
+
+    <a href="tel:+919866779493"
+       class="floating-call"
+       aria-label="Call Sai Consultancy">
+
+        📞
+
+    </a>
+
+</div>
+
+
+
+<!-- ================= MOBILE BOTTOM BAR ================= -->
+
+<div class="mobile-contact-bar">
+
+    <a href="tel:+919866779493">
+
+        <span>📞</span>
+
+        <small>Call</small>
+
+    </a>
+
+
+    <a href="https://wa.me/919866779493"
+       target="_blank">
+
+        <span>💬</span>
+
+        <small>WhatsApp</small>
+
+    </a>
+
+
+    <a href="contact.html">
+
+        <span>📋</span>
+
+        <small>Enquiry</small>
+
+    </a>
+
+</div>
+<script>
+/* =========================================
+   SUPABASE CONFIGURATION
+   ========================================= */
+
+const SUPABASE_URL =
+    "https://mwjbqedrmwiehlkszmq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1ysH560VoBoWH5wzlrhtcw_i2Q6VKBS";
+
+const realEstateSupabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =========================================
+   LOAD PROPERTIES FROM SUPABASE
+   ========================================= */
+
+async function loadSupabaseProperties() {
+
+    const container =
+        document.querySelector(".property-grid");
+
+    if (!container) {
+        console.error(
+            "Property grid not found."
+        );
+        return;
+    }
+
+    container.innerHTML =
+        "<p>Loading properties...</p>";
+
+    try {
+
+        const {
+            data: properties,
+            error
+        } =
+            await realEstateSupabase
+                .from("properties")
+                .select("*")
+                .order("id", {
+                    ascending: false
+                });
+
+
+        if (error) {
+
+            console.error(
+                "Supabase property error:",
+                error
+            );
+
+            container.innerHTML =
+                "<p>Unable to load properties.</p>";
+
+            return;
+        }
+
+
+        if (
+            !properties ||
+            properties.length === 0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    No properties available at the moment.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        container.innerHTML = "";
+
+
+        properties.forEach(
+            function(property) {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "property-card";
+
+
+                const image =
+                    property.image ||
+                    (
+                        Array.isArray(property.gallery) &&
+                        property.gallery.length > 0
+                            ? property.gallery[0]
+                            : ""
+                    );
+
+
+                card.innerHTML = `
+
+                    <div class="property-image">
+
+                        <img
+                            src="${escapePropertyHtml(image)}"
+                            alt="${escapePropertyHtml(property.name || "Property")}"
+                        >
+
+                    </div>
+
+
+                    <div class="property-content">
+
+                        <h3>
+                            ${escapePropertyHtml(
+                                property.name || ""
+                            )}
+                        </h3>
+
+
+                        <p>
+                            📍
+                            ${escapePropertyHtml(
+                                property.location || ""
+                            )}
+                        </p>
+
+
+                        <p>
+                            📐
+                            ${escapePropertyHtml(
+                                property.area || ""
+                            )}
+                        </p>
+
+
+                        <p>
+                            💰
+                            ${escapePropertyHtml(
+                                property.price || ""
+                            )}
+                        </p>
+
+
+                        <p>
+                            🏠
+                            ${escapePropertyHtml(
+                                property.type || ""
+                            )}
+                        </p>
+
+
+                        <p>
+                            ✅
+                            ${escapePropertyHtml(
+                                property.status || ""
+                            )}
+                        </p>
+
+
+                        <a
+                            href="property-details.html?id=${property.id}"
+                            class="property-button"
+                        >
+                            View Details
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(card);
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Property loading error:",
+            error
+        );
+
+        container.innerHTML =
+            "<p>Unable to load properties.</p>";
+
+    }
+}
+
+
+/* =========================================
+   SAFE HTML
+   ========================================= */
+
+function escapePropertyHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================
+   PAGE LOAD
+   ========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadSupabaseProperties();
+
+    }
+);
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Panel | Sai Consultancy</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- SUPABASE JAVASCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header>
+
+    <div class="logo">
+
+        <img
+            src="images/logo.png"
+            alt="Sai Consultancy Logo"
+        >
+
+        <div>
+
+            <h1>Sai Consultancy</h1>
+
+            <p>Admin Panel</p>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     ADMIN LOGIN
+     ===================================================== -->
+
+<section
+    id="adminLogin"
+    class="admin-section"
+>
+
+    <div class="admin-box">
+
+        <h2>
+            Admin Login
+        </h2>
+
+        <p>
+            Login to manage properties
+        </p>
+
+
+        <!-- EMAIL -->
+
+        <label>
+            Admin Email
+        </label>
+
+        <input
+            type="email"
+            id="adminUsername"
+            placeholder="Enter admin email"
+            autocomplete="username"
+            required
+        >
+
+
+        <!-- PASSWORD -->
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="adminPassword"
+            placeholder="Enter password"
+            autocomplete="current-password"
+            required
+        >
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+            type="button"
+            onclick="adminLogin()"
+            class="admin-button"
+        >
+            Login
+        </button>
+
+
+        <!-- LOGIN MESSAGE -->
+
+        <p
+            id="loginMessage"
+            class="admin-message"
+        ></p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN DASHBOARD
+     ===================================================== -->
+
+<section
+    id="adminDashboard"
+    class="admin-section"
+    style="display:none;"
+>
+
+    <div class="admin-container">
+
+
+        <!-- DASHBOARD HEADER -->
+
+        <div class="admin-heading">
+
+            <div>
+
+                <h2>
+                    Property Management
+                </h2>
+
+                <p>
+                    Add and manage Sai Consultancy properties
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                onclick="adminLogout()"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ADD PROPERTY
+             ================================================= -->
+
+        <div class="admin-card">
+
+            <h3>
+                Add New Property
+            </h3>
+
+
+            <form id="propertyForm">
+
+
+                <div class="admin-grid">
+
+
+                    <!-- PROPERTY NAME -->
+
+                    <div>
+
+                        <label>
+                            Property Name *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminPropertyName"
+                            placeholder="Example: Residential Open Plot"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- LOCATION -->
+
+                    <div>
+
+                        <label>
+                            Location *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminPropertyLocation"
+                            placeholder="Example: Narsipatnam, Andhra Pradesh"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- AREA -->
+
+                    <div>
+
+                        <label>
+                            Area / Size *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminPropertyArea"
+                            placeholder="Example: 300 Sq Yards"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- PRICE -->
+
+                    <div>
+
+                        <label>
+                            Price *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="adminPropertyPrice"
+                            placeholder="Example: ₹30 Lakhs"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- PROPERTY TYPE -->
+
+                    <div>
+
+                        <label>
+                            Property Type *
+                        </label>
+
+                        <select
+                            id="adminPropertyType"
+                            required
+                        >
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="plot">
+                                Open Plot
+                            </option>
+
+                            <option value="flat">
+                                Flat
+                            </option>
+
+                            <option value="villa">
+                                Villa
+                            </option>
+
+                            <option value="commercial">
+                                Commercial
+                            </option>
+
+                            <option value="land">
+                                Agricultural Land
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- STATUS -->
+
+                    <div>
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select
+                            id="adminPropertyStatus"
+                        >
+
+                            <option value="FOR SALE">
+                                FOR SALE
+                            </option>
+
+                            <option value="SOLD">
+                                SOLD
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <label>
+                    Property Description *
+                </label>
+
+                <textarea
+                    id="adminPropertyDescription"
+                    rows="5"
+                    placeholder="Enter complete property description"
+                    required
+                ></textarea>
+
+
+
+                <!-- MAIN IMAGE -->
+
+                <label>
+                    Main Property Image *
+                </label>
+
+                <input
+                    type="file"
+                    id="adminMainImage"
+                    accept="image/*"
+                    required
+                >
+<div id="mainImagePreview" class="image-preview-box">
+</div>
+
+
+                <!-- GALLERY -->
+
+                <label>
+                    Additional Property Images
+                </label>
+
+                <input
+                    type="file"
+                    id="adminGalleryImages"
+                    accept="image/*"
+                    multiple
+                >
+<div id="galleryImagePreview" class="gallery-preview-box">
+</div>
+
+
+                <!-- GOOGLE MAP -->
+
+                <label>
+                    Google Maps Link
+                </label>
+
+                <input
+                    type="url"
+                    id="adminPropertyMap"
+                    placeholder="Paste Google Maps link"
+                >
+
+
+
+                <!-- SAVE BUTTON -->
+
+                <button
+                    type="submit"
+                    class="admin-save-button"
+                >
+                    💾 Save Property
+                </button>
+
+
+            </form>
+
+
+            <p
+                id="propertySaveMessage"
+                class="admin-message"
+            ></p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SAVED PROPERTIES
+             ================================================= -->
+
+        <div class="admin-card">
+
+            <h3>
+                Saved Properties
+            </h3>
+
+            <div
+                id="adminPropertyList"
+                class="admin-property-list"
+            ></div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+/* =====================================================
+   SUPABASE CONFIGURATION
+   ===================================================== */
+
+const SUPABASE_URL =
+    "https://mwjbqedrmwieehlkszmq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_1ysH560VoBoWH5wzlrhtcw_i2Q6VKBS";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =====================================================
+   EDIT MODE
+   ===================================================== */
+
+let editingPropertyId = null;
+
+
+/* =====================================================
+   ADMIN LOGIN
+   ===================================================== */
+
+async function adminLogin() {
+
+    const email =
+        document
+        .getElementById("adminUsername")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("adminPassword")
+        .value;
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+
+    if (!email || !password) {
+
+        loginMessage.textContent =
+            "Please enter email and password.";
+
+        return;
+    }
+
+
+    loginMessage.textContent =
+        "Logging in...";
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+    if (error) {
+
+        console.error(error);
+
+        loginMessage.textContent =
+            error.message;
+
+        return;
+    }
+
+
+    loginMessage.textContent =
+        "Login successful!";
+
+    showDashboard();
+
+}
+
+
+/* =====================================================
+   SHOW DASHBOARD
+   ===================================================== */
+
+function showDashboard() {
+
+    document.getElementById(
+        "adminLogin"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "adminDashboard"
+    ).style.display = "block";
+
+
+    displayAdminProperties();
+
+}
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+async function adminLogout() {
+
+    await supabaseClient.auth.signOut();
+
+    location.reload();
+
+}
+
+
+/* =====================================================
+   CHECK SESSION
+   ===================================================== */
+
+async function checkAdminSession() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient.auth.getSession();
+
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+    }
+
+
+    if (
+        data &&
+        data.session
+    ) {
+
+        showDashboard();
+
+    }
+
+}
+
+
+/* =====================================================
+   UPLOAD IMAGE
+   ===================================================== */
+
+async function uploadPropertyImage(file) {
+
+    if (!file) {
+
+        return null;
+
+    }
+
+
+    const fileName =
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2, 10) +
+        "-" +
+        file.name
+            .replace(/\s+/g, "-");
+
+
+    const filePath =
+        fileName;
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+        .storage
+        .from("property-images")
+        .upload(
+            filePath,
+            file,
+            {
+                upsert: false
+            }
+        );
+
+
+    if (error) {
+
+        throw error;
+
+    }
+
+
+    const {
+        data
+    } =
+        supabaseClient
+        .storage
+        .from("property-images")
+        .getPublicUrl(filePath);
+
+
+    return data.publicUrl;
+
+}
+
+
+/* =====================================================
+   SAVE PROPERTY
+   ADD + EDIT
+   ===================================================== */
+
+document
+.getElementById("propertyForm")
+.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const saveMessage =
+            document.getElementById(
+                "propertySaveMessage"
+            );
+
+
+        saveMessage.textContent =
+            editingPropertyId
+            ? "Updating property..."
+            : "Saving property...";
+
+
+        try {
+
+            /* -----------------------------------------
+               FORM VALUES
+               ----------------------------------------- */
+
+            const name =
+                document
+                .getElementById(
+                    "adminPropertyName"
+                )
+                .value
+                .trim();
+
+
+            const location =
+                document
+                .getElementById(
+                    "adminPropertyLocation"
+                )
+                .value
+                .trim();
+
+
+            const area =
+                document
+                .getElementById(
+                    "adminPropertyArea"
+                )
+                .value
+                .trim();
+
+
+            const price =
+                document
+                .getElementById(
+                    "adminPropertyPrice"
+                )
+                .value
+                .trim();
+
+
+            const type =
+                document
+                .getElementById(
+                    "adminPropertyType"
+                )
+                .value;
+
+
+            const status =
+                document
+                .getElementById(
+                    "adminPropertyStatus"
+                )
+                .value;
+
+
+            const description =
+                document
+                .getElementById(
+                    "adminPropertyDescription"
+                )
+                .value
+                .trim();
+
+
+            const map =
+                document
+                .getElementById(
+                    "adminPropertyMap"
+                )
+                .value
+                .trim();
+
+
+            const mainImageFile =
+                document
+                .getElementById(
+                    "adminMainImage"
+                )
+                .files[0];
+
+
+            const galleryFiles =
+                Array.from(
+                    document
+                    .getElementById(
+                        "adminGalleryImages"
+                    )
+                    .files
+                );
+
+
+            /* -----------------------------------------
+               GET EXISTING PROPERTY WHEN EDITING
+               ----------------------------------------- */
+
+            let existingProperty = null;
+
+
+            if (editingPropertyId) {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                    .from("properties")
+                    .select("*")
+                    .eq(
+                        "id",
+                        editingPropertyId
+                    )
+                    .single();
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                existingProperty =
+                    data;
+
+            }
+
+
+            /* -----------------------------------------
+               MAIN IMAGE
+               ----------------------------------------- */
+
+            let mainImage =
+                existingProperty
+                ? existingProperty.image
+                : null;
+
+
+            if (mainImageFile) {
+
+                mainImage =
+                    await uploadPropertyImage(
+                        mainImageFile
+                    );
+
+            }
+
+
+            if (
+                !mainImage &&
+                !editingPropertyId
+            ) {
+
+                alert(
+                    "Please select a main property image."
+                );
+
+                saveMessage.textContent = "";
+
+                return;
+
+            }
+
+
+            /* -----------------------------------------
+               GALLERY
+               ----------------------------------------- */
+
+            let gallery =
+                existingProperty &&
+                Array.isArray(
+                    existingProperty.gallery
+                )
+                ? existingProperty.gallery
+                : [];
+
+
+            if (
+                mainImage &&
+                gallery.length === 0
+            ) {
+
+                gallery = [
+                    mainImage
+                ];
+
+            }
+
+
+            /* -----------------------------------------
+               NEW GALLERY IMAGES
+               ----------------------------------------- */
+
+            for (
+                const file of galleryFiles
+            ) {
+
+                const imageUrl =
+                    await uploadPropertyImage(
+                        file
+                    );
+
+
+                if (imageUrl) {
+
+                    gallery.push(
+                        imageUrl
+                    );
+
+                }
+
+            }
+
+
+            /* -----------------------------------------
+               ADD NEW PROPERTY
+               ----------------------------------------- */
+
+            if (!editingPropertyId) {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                    .from("properties")
+                    .insert({
+
+                        name:
+                            name,
+
+                        location:
+                            location,
+
+                        area:
+                            area,
+
+                        price:
+                            price,
+
+                        type:
+                            type,
+
+                        status:
+                            status,
+
+                        description:
+                            description,
+
+                        image:
+                            mainImage,
+
+                        gallery:
+                            gallery,
+
+                        map:
+                            map
+
+                    });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                saveMessage.textContent =
+                    "✅ Property added successfully!";
+
+            }
+
+
+            /* -----------------------------------------
+               UPDATE EXISTING PROPERTY
+               ----------------------------------------- */
+
+            else {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                    .from("properties")
+                    .update({
+
+                        name:
+                            name,
+
+                        location:
+                            location,
+
+                        area:
+                            area,
+
+                        price:
+                            price,
+
+                        type:
+                            type,
+
+                        status:
+                            status,
+
+                        description:
+                            description,
+
+                        image:
+                            mainImage,
+
+                        gallery:
+                            gallery,
+
+                        map:
+                            map
+
+                    })
+                    .eq(
+                        "id",
+                        editingPropertyId
+                    );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                saveMessage.textContent =
+                    "✅ Property updated successfully!";
+
+            }
+
+
+            /* -----------------------------------------
+               RESET
+               ----------------------------------------- */
+
+            editingPropertyId = null;
+
+
+            document
+            .getElementById(
+                "propertyForm"
+            )
+            .reset();
+
+
+            changeSaveButtonToAdd();
+
+
+            displayAdminProperties();
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Property save error:",
+                error
+            );
+
+
+            saveMessage.textContent =
+                "❌ " +
+                (
+                    error.message ||
+                    "Unable to save property."
+                );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   DISPLAY PROPERTIES
+   ===================================================== */
+
+async function displayAdminProperties() {
+
+    const container =
+        document.getElementById(
+            "adminPropertyList"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "<p>Loading properties...</p>";
+
+
+    const {
+        data: properties,
+        error
+    } =
+        await supabaseClient
+        .from("properties")
+        .select("*")
+        .order(
+            "id",
+            {
+                ascending: false
+            }
+        );
+
+
+    if (error) {
+
+        console.error(error);
+
+        container.innerHTML =
+            "<p>❌ Unable to load properties.</p>";
+
+        return;
+
+    }
+
+
+    if (
+        !properties ||
+        properties.length === 0
+    ) {
+
+        container.innerHTML =
+            "<p>No properties added yet.</p>";
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    properties.forEach(
+        function(property) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "admin-property-item";
+
+
+            item.innerHTML = `
+
+                <img
+                    src="${property.image || ""}"
+                    alt="${property.name}"
+                >
+
+                <div>
+
+                    <h4>
+                        ${property.name}
+                    </h4>
+
+                    <p>
+                        📍 ${property.location}
+                    </p>
+
+                    <p>
+                        📐 ${property.area}
+                    </p>
+
+                    <p>
+                        💰 ${property.price}
+                    </p>
+
+                    <p>
+                        🏠 ${property.type}
+                    </p>
+
+                    <p>
+                        ✅ ${property.status}
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="admin-property-actions"
+                >
+
+                    <button
+                        type="button"
+                        onclick="editProperty(${property.id})"
+                        class="admin-edit-button"
+                    >
+                        ✏️ Edit
+                    </button>
+
+
+                    <button
+                        type="button"
+                        onclick="deleteProperty(${property.id})"
+                        class="admin-delete-button"
+                    >
+                        🗑️ Delete
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   EDIT PROPERTY
+   ===================================================== */
+
+async function editProperty(id) {
+
+    const saveMessage =
+        document.getElementById(
+            "propertySaveMessage"
+        );
+
+
+    saveMessage.textContent =
+        "Loading property...";
+
+
+    try {
+
+        const {
+            data: property,
+            error
+        } =
+            await supabaseClient
+            .from("properties")
+            .select("*")
+            .eq(
+                "id",
+                id
+            )
+            .single();
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        editingPropertyId =
+            property.id;
+
+
+        /* -----------------------------------------
+           LOAD VALUES INTO FORM
+           ----------------------------------------- */
+
+        document.getElementById(
+            "adminPropertyName"
+        ).value =
+            property.name || "";
+
+
+        document.getElementById(
+            "adminPropertyLocation"
+        ).value =
+            property.location || "";
+
+
+        document.getElementById(
+            "adminPropertyArea"
+        ).value =
+            property.area || "";
+
+
+        document.getElementById(
+            "adminPropertyPrice"
+        ).value =
+            property.price || "";
+
+
+        document.getElementById(
+            "adminPropertyType"
+        ).value =
+            property.type || "";
+
+
+        document.getElementById(
+            "adminPropertyStatus"
+        ).value =
+            property.status || "FOR SALE";
+
+
+        document.getElementById(
+            "adminPropertyDescription"
+        ).value =
+            property.description || "";
+
+
+        document.getElementById(
+            "adminPropertyMap"
+        ).value =
+            property.map || "";
+
+
+        /* -----------------------------------------
+           MAIN IMAGE NOT REQUIRED DURING EDIT
+           ----------------------------------------- */
+
+        document.getElementById(
+            "adminMainImage"
+        ).required = false;
+
+
+        /* -----------------------------------------
+           CHANGE BUTTON
+           ----------------------------------------- */
+
+        const saveButton =
+            document.querySelector(
+                ".admin-save-button"
+            );
+
+
+        if (saveButton) {
+
+            saveButton.textContent =
+                "✏️ Update Property";
+
+        }
+
+
+        saveMessage.textContent =
+            "✏️ Editing: " +
+            property.name;
+
+
+        /* -----------------------------------------
+           SCROLL TO FORM
+           ----------------------------------------- */
+
+        document
+        .getElementById(
+            "propertyForm"
+        )
+        .scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "start"
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        saveMessage.textContent =
+            "❌ Unable to load property.";
+
+    }
+
+}
+
+
+/* =====================================================
+   CHANGE BUTTON BACK TO ADD
+   ===================================================== */
+
+function changeSaveButtonToAdd() {
+
+    const saveButton =
+        document.querySelector(
+            ".admin-save-button"
+        );
+
+
+    if (saveButton) {
+
+        saveButton.textContent =
+            "💾 Save Property";
+
+    }
+
+
+    const mainImage =
+        document.getElementById(
+            "adminMainImage"
+        );
+
+
+    if (mainImage) {
+
+        mainImage.required = true;
+
+    }
+
+}
+
+
+/* =====================================================
+   DELETE PROPERTY
+   ===================================================== */
+
+                        
+    /* =====================================================
+   GET STORAGE PATH FROM PUBLIC URL
+   ===================================================== */
+
+function getStoragePathFromUrl(url) {
+
+    if (!url) {
+        return null;
+    }
+
+    const marker =
+        "/storage/v1/object/public/property-images/";
+
+    const index =
+        url.indexOf(marker);
+
+    if (index === -1) {
+        return null;
+    }
+
+    return decodeURIComponent(
+        url.substring(
+            index + marker.length
+        )
+    );
+}
+
+
+/* =====================================================
+   DELETE PROPERTY + STORAGE IMAGES
+   ===================================================== */
+
+async function deleteProperty(id) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this property and all its images?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        /* -----------------------------------------
+           GET PROPERTY
+           ----------------------------------------- */
+
+        const {
+            data: property,
+            error: fetchError
+        } =
+            await supabaseClient
+            .from("properties")
+            .select("*")
+            .eq("id", id)
+            .single();
+
+
+        if (fetchError) {
+            throw fetchError;
+        }
+
+
+        /* -----------------------------------------
+           COLLECT IMAGE URLS
+           ----------------------------------------- */
+
+        const imagePaths = [];
+
+
+        /* MAIN IMAGE */
+
+        if (property.image) {
+
+            const mainPath =
+                getStoragePathFromUrl(
+                    property.image
+                );
+
+            if (mainPath) {
+                imagePaths.push(mainPath);
+            }
+        }
+
+
+        /* GALLERY IMAGES */
+
+        if (
+            Array.isArray(property.gallery)
+        ) {
+
+            property.gallery.forEach(
+                function(imageUrl) {
+
+                    const path =
+                        getStoragePathFromUrl(
+                            imageUrl
+                        );
+
+                    if (
+                        path &&
+                        !imagePaths.includes(path)
+                    ) {
+
+                        imagePaths.push(path);
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* -----------------------------------------
+           DELETE STORAGE IMAGES
+           ----------------------------------------- */
+
+        if (imagePaths.length > 0) {
+
+            const {
+                error: storageError
+            } =
+                await supabaseClient
+                .storage
+                .from("property-images")
+                .remove(
+                    imagePaths
+                );
+
+
+            if (storageError) {
+
+                console.warn(
+                    "Storage cleanup warning:",
+                    storageError
+                );
+
+            }
+
+        }
+
+
+        /* -----------------------------------------
+           DELETE DATABASE RECORD
+           ----------------------------------------- */
+
+        const {
+            error: deleteError
+        } =
+            await supabaseClient
+            .from("properties")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
+
+
+        if (deleteError) {
+            throw deleteError;
+        }
+
+
+        /* -----------------------------------------
+           SUCCESS
+           ----------------------------------------- */
+
+        alert(
+            "✅ Property and images deleted successfully!"
+        );
+
+
+        displayAdminProperties();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Delete property error:",
+            error
+        );
+
+
+        alert(
+            "❌ Unable to delete property.\n\n" +
+            (
+                error.message ||
+                "Unknown error"
+            )
+        );
+
+    }
+
+}
+/* =====================================================
+   PAGE LOAD
+   ===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        checkAdminSession();
+
+    }
+);
+
+
+/* =====================================================
+   AUTH STATE
+   ===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+    function(event, session) {
+
+        console.log(
+            "Auth event:",
+            event
+        );
+
+
+        if (
+            event === "SIGNED_IN" &&
+            session
+        ) {
+
+            showDashboard();
+
+        }
+
+
+        if (
+            event === "SIGNED_OUT"
+        ) {
+
+            location.reload();
+
+        }
+
+    }
+);
+/* =====================================================
+   STEP 20.11.2
+   MAIN IMAGE PREVIEW
+   ===================================================== */
+
+const mainImageInput =
+    document.getElementById(
+        "adminMainImage"
+    );
+
+const mainImagePreview =
+    document.getElementById(
+        "mainImagePreview"
+    );
+
+
+if (mainImageInput && mainImagePreview) {
+
+    mainImageInput.addEventListener(
+        "change",
+        function () {
+
+            /* Clear old preview */
+
+            mainImagePreview.innerHTML = "";
+
+
+            /* Get selected file */
+
+            const file =
+                this.files[0];
+
+
+            /* No file selected */
+
+            if (!file) {
+
+                return;
+
+            }
+
+
+            /* Check image */
+
+            if (
+                !file.type.startsWith(
+                    "image/"
+                )
+            ) {
+
+                alert(
+                    "Please select an image file."
+                );
+
+                this.value = "";
+
+                return;
+
+            }
+
+
+            /* Create FileReader */
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    mainImagePreview.innerHTML = `
+
+                        <div class="preview-item">
+
+                            <img
+                                src="${event.target.result}"
+                                alt="Main Property Image Preview"
+                            >
+
+                            <p>
+                                Main Image Preview
+                            </p>
+
+                        </div>
+
+                    `;
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   STEP 20.11.2
+   GALLERY IMAGE PREVIEW
+   ===================================================== */
+
+const galleryInput =
+    document.getElementById(
+        "adminGalleryImages"
+    );
+
+const galleryPreview =
+    document.getElementById(
+        "galleryImagePreview"
+    );
+
+
+if (galleryInput && galleryPreview) {
+
+    galleryInput.addEventListener(
+        "change",
+        function () {
+
+            /* Clear old preview */
+
+            galleryPreview.innerHTML = "";
+
+
+            /* Get selected files */
+
+            const files =
+                Array.from(
+                    this.files
+                );
+
+
+            /* No files */
+
+            if (
+                files.length === 0
+            ) {
+
+                return;
+
+            }
+
+
+            /* Display every image */
+
+            files.forEach(
+                function (
+                    file,
+                    index
+                ) {
+
+                    /* Check image */
+
+                    if (
+                        !file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /* FileReader */
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            const previewItem =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            previewItem.className =
+                                "gallery-preview-item";
+
+
+                            previewItem.innerHTML = `
+
+                                <img
+                                    src="${event.target.result}"
+                                    alt="Gallery Image ${index + 1}"
+                                >
+
+                                <p>
+                                    Image ${index + 1}
+                                </p>
+
+                            `;
+
+
+                            galleryPreview.appendChild(
+                                previewItem
+                            );
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

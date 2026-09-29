@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Property Details | Sai Consultancy</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <img
+            src="images/logo.png"
+            alt="Sai Consultancy Logo"
+        >
+
+        <div>
+
+            <h1>
+                Sai Consultancy
+            </h1>
+
+            <p>
+                Real Estate & Financial Services
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="top-contact">
+
+        <a href="tel:+919866779493">
+            📞 +91 98667 79493
+        </a>
+
+
+        <a
+            href="https://wa.me/919866779493"
+            target="_blank"
+        >
+            💬 WhatsApp
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <a href="index.html">
+        Home
+    </a>
+
+
+    <a href="real-estate.html">
+        Real Estate
+    </a>
+
+
+    <a href="home-loans.html">
+        Home Loans
+    </a>
+
+
+    <a href="contact.html">
+        Contact
+    </a>
+
+</nav>
+
+
+
+<!-- ================= PROPERTY DETAILS ================= -->
+
+<section class="property-details-page">
+
+    <div
+        id="propertyLoading"
+        class="no-properties"
+    >
+
+        <h2>
+            Loading Property...
+        </h2>
+
+        <p>
+            Please wait.
+        </p>
+
+    </div>
+
+
+
+    <div
+        id="propertyDetailsContainer"
+        class="property-details-container"
+        style="display:none;"
+    >
+
+
+        <!-- ================= IMAGE SECTION ================= -->
+
+        <div class="property-details-images">
+
+
+            <img
+                id="mainPropertyImage"
+                class="main-property-image"
+                src=""
+                alt="Property"
+            >
+
+
+            <div
+                id="propertyThumbnails"
+                class="property-thumbnails"
+            >
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= DETAILS SECTION ================= -->
+
+        <div class="property-details-content">
+
+
+            <!-- STATUS -->
+
+            <span
+                id="propertyStatus"
+                class="details-tag"
+            >
+            </span>
+
+
+
+            <!-- PROPERTY NAME -->
+
+            <h1 id="propertyName">
+                Property
+            </h1>
+
+
+
+            <!-- LOCATION -->
+
+            <p
+                id="propertyLocation"
+                class="property-location"
+            >
+            </p>
+
+
+
+            <!-- PRICE -->
+
+            <div class="price-box">
+
+                <span>
+                    Price
+                </span>
+
+                <strong id="propertyPrice">
+                </strong>
+
+            </div>
+
+
+
+            <!-- PROPERTY INFO -->
+
+            <div class="property-info-grid">
+
+
+                <div>
+
+                    <span>
+                        📐 Area
+                    </span>
+
+                    <strong id="propertyArea">
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        🏠 Type
+                    </span>
+
+                    <strong id="propertyTypeDetails">
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        📍 Location
+                    </span>
+
+                    <strong id="propertyLocationShort">
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <span>
+                        ✅ Status
+                    </span>
+
+                    <strong id="propertyStatusDetails">
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="full-description">
+
+                <h2>
+                    Property Description
+                </h2>
+
+                <p id="propertyDescription">
+                </p>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="details-buttons">
+
+
+                <a
+                    href="tel:+919866779493"
+                    class="call-button"
+                >
+                    📞 Call Now
+                </a>
+
+
+
+                <a
+                    id="propertyWhatsApp"
+                    href="#"
+                    target="_blank"
+                    class="whatsapp-button"
+                >
+                    💬 WhatsApp
+                </a>
+
+
+            </div>
+
+
+
+            <!-- GOOGLE MAP -->
+
+            <a
+                id="propertyMap"
+                href="#"
+                target="_blank"
+                class="details-map-button"
+            >
+                🗺️ View Property Location
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h3>
+        Sai Consultancy
+    </h3>
+
+
+    <p>
+        📞 +91 98667 79493
+    </p>
+
+
+    <p>
+        📧 saiconsultancys1@gmail.com
+    </p>
+
+
+    <p>
+        📍 నర్సీపట్నం, ఆంధ్ర ప్రదేశ్ - 531116
+    </p>
+
+
+    <p>
+        © 2026 Sai Consultancy.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+
+<!-- ================= SUPABASE LIVE SCRIPT ================= -->
+
+<script>
+
+    /* =================================================
+       SUPABASE CONFIGURATION
+       ================================================= */
+
+    const SUPABASE_URL =
+        "https://mwjbqedrmwieehlkszmq.supabase.co";
+
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_1ysH560VoBoWH5wzlrhtcw_i2Q6VKBS";
+
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+
+
+
+    /* =================================================
+       LOAD PROPERTY
+       ================================================= */
+
+    async function loadPropertyDetails() {
+
+
+        const loading =
+            document.getElementById(
+                "propertyLoading"
+            );
+
+
+        const container =
+            document.getElementById(
+                "propertyDetailsContainer"
+            );
+
+
+
+        /* =============================================
+           GET ID FROM URL
+           ============================================= */
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const propertyId =
+            urlParams.get("id");
+
+
+
+        /* =============================================
+           CHECK ID
+           ============================================= */
+
+        if (!propertyId) {
+
+            showPropertyError(
+                "Property ID is missing."
+            );
+
+            return;
+
+        }
+
+
+
+        console.log(
+            "Loading Property ID:",
+            propertyId
+        );
+
+
+
+        /* =============================================
+           GET PROPERTY FROM SUPABASE
+           ============================================= */
+
+        const {
+            data: property,
+            error
+        } =
+            await supabaseClient
+                .from("properties")
+                .select("*")
+                .eq("id", propertyId)
+                .single();
+
+
+
+        /* =============================================
+           DATABASE ERROR
+           ============================================= */
+
+        if (error) {
+
+            console.error(
+                "Supabase Property Error:",
+                error
+            );
+
+
+            showPropertyError(
+                "Unable to load property details."
+            );
+
+
+            return;
+
+        }
+
+
+
+        /* =============================================
+           PROPERTY NOT FOUND
+           ============================================= */
+
+        if (!property) {
+
+            showPropertyError(
+                "Property not found."
+            );
+
+
+            return;
+
+        }
+
+
+
+        console.log(
+            "Property Loaded:",
+            property
+        );
+
+
+
+        /* =============================================
+           HIDE LOADING
+           ============================================= */
+
+        loading.style.display =
+            "none";
+
+
+        container.style.display =
+            "grid";
+
+
+
+        /* =============================================
+           BASIC DETAILS
+           ============================================= */
+
+        document.getElementById(
+            "propertyName"
+        ).textContent =
+            property.name || "";
+
+
+
+        document.getElementById(
+            "propertyLocation"
+        ).textContent =
+            "📍 " +
+            (property.location || "");
+
+
+
+        document.getElementById(
+            "propertyPrice"
+        ).textContent =
+            property.price || "";
+
+
+
+        document.getElementById(
+            "propertyArea"
+        ).textContent =
+            property.area || "";
+
+
+
+        document.getElementById(
+            "propertyTypeDetails"
+        ).textContent =
+            property.type || "";
+
+
+
+        document.getElementById(
+            "propertyLocationShort"
+        ).textContent =
+            property.location || "";
+
+
+
+        document.getElementById(
+            "propertyStatus"
+        ).textContent =
+            property.status || "";
+
+
+
+        document.getElementById(
+            "propertyStatusDetails"
+        ).textContent =
+            property.status || "";
+
+
+
+        document.getElementById(
+            "propertyDescription"
+        ).textContent =
+            property.description || "";
+
+
+
+        /* =============================================
+           MAIN IMAGE
+           ============================================= */
+
+        const mainImage =
+            document.getElementById(
+                "mainPropertyImage"
+            );
+
+
+        mainImage.src =
+            property.image || "";
+
+
+        mainImage.alt =
+            property.name || "Property";
+
+
+
+        /* =============================================
+           GALLERY
+           ============================================= */
+
+        const thumbnails =
+            document.getElementById(
+                "propertyThumbnails"
+            );
+
+
+        thumbnails.innerHTML =
+            "";
+
+
+
+        let gallery =
+            [];
+
+
+        if (
+            Array.isArray(
+                property.gallery
+            )
+        ) {
+
+            gallery =
+                property.gallery;
+
+        } else {
+
+            try {
+
+                gallery =
+                    JSON.parse(
+                        property.gallery || "[]"
+                    );
+
+            } catch (error) {
+
+                gallery =
+                    [];
+
+            }
+
+        }
+
+
+
+        /* Main image first */
+
+        if (
+            property.image &&
+            !gallery.includes(
+                property.image
+            )
+        ) {
+
+            gallery.unshift(
+                property.image
+            );
+
+        }
+
+
+
+        /* =============================================
+           CREATE THUMBNAILS
+           ============================================= */
+
+        gallery.forEach(
+            function(
+                image,
+                index
+            ) {
+
+
+                const thumbnail =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                thumbnail.src =
+                    image;
+
+
+                thumbnail.alt =
+                    property.name +
+                    " Image " +
+                    (index + 1);
+
+
+
+                thumbnail.onclick =
+                    function() {
+
+                        mainImage.src =
+                            image;
+
+                    };
+
+
+
+                thumbnails.appendChild(
+                    thumbnail
+                );
+
+            }
+        );
+
+
+
+        /* =============================================
+           WHATSAPP
+           ============================================= */
+
+        const whatsappMessage =
+            "Hello Sai Consultancy, " +
+            "I am interested in " +
+            (property.name || "this property") +
+            " located at " +
+            (property.location || "") +
+            ". Please share complete details.";
+
+
+
+        document.getElementById(
+            "propertyWhatsApp"
+        ).href =
+            "https://wa.me/919866779493?text=" +
+            encodeURIComponent(
+                whatsappMessage
+            );
+
+
+
+        /* =============================================
+           GOOGLE MAP
+           ============================================= */
+
+        const mapButton =
+            document.getElementById(
+                "propertyMap"
+            );
+
+
+        if (
+            property.map &&
+            property.map.trim() !== ""
+        ) {
+
+            mapButton.href =
+                property.map;
+
+            mapButton.style.display =
+                "inline-block";
+
+        } else {
+
+            mapButton.style.display =
+                "none";
+
+        }
+
+
+    }
+
+
+
+    /* =================================================
+       PROPERTY ERROR
+       ================================================= */
+
+    function showPropertyError(
+        message
+    ) {
+
+        const loading =
+            document.getElementById(
+                "propertyLoading"
+            );
+
+
+        loading.innerHTML = `
+
+            <h2>
+                Property Not Found
+            </h2>
+
+            <p>
+                ${message}
+            </p>
+
+            <br>
+
+            <a
+                href="real-estate.html"
+                class="view-details-button"
+            >
+                ← Back to Properties
+            </a>
+
+        `;
+
+    }
+
+
+
+    /* =================================================
+       START
+       ================================================= */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            loadPropertyDetails();
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
